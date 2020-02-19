@@ -1,0 +1,109 @@
+<!--
+	[Template] Flex Frame: Messaging (3-Panel) (Desktop) 
+	version: 2
+	developer: Tanvir Haider
+	team: Ad Platforms
+	last modified: 02.19.2020 
+	git repo: 
+-->
+
+
+<a target="_blank" href="%%CLICK_URL_UNESC%%%%DEST_URL%%">
+  <div id="container">
+      <div id="flex-frame">
+        <div class="media-container">
+        <div class="gradient"></div>
+        <div class="logo">
+              <img onclick="eventTracker.generalEventTrack('clickURL', 'logo', '%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%')" class="logo-std" src="[%Logo%]" />
+              <img onclick="eventTracker.generalEventTrack('clickURL', 'logo', '%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%')" class="logo-hi-res" src="[%LogoHiRes%]" />
+        </div>
+          <div class="media-content">
+             
+            <div class="title">[%Headline%]</div>
+            <div class="summary">[%Summary%]</div>
+            <div onclick="eventTracker.generalEventTrack('clickURL', 'cta', '%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%')" class="cta">[%CTA%]</div>
+          </div>   
+        </div>
+  
+        <div class="content-container">
+        <div class="logo">
+                <img onclick="eventTracker.generalEventTrack('clickURL', 'logo', '%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%')" class="logo-std" src="[%Logo%]" />
+                <img onclick="eventTracker.generalEventTrack('clickURL', 'logo', '%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%')" class="logo-hi-res" src="[%LogoHiRes%]" />
+              </div>
+          <div class="content-well">
+            <div class="content-middle-well">
+              
+              <div class="title">[%Headline%]</div>
+              <div class="summary">[%Summary%]</div>
+              <div onclick="eventTracker.generalEventTrack('clickURL', 'cta', '%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%')" class="cta">[%CTA%]</div>
+            </div>
+          </div>
+        </div>
+        <div class="next-main-container">
+        <div class="next-container">
+          <div class="gradient"></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </a>
+  
+  <div style="display: none;">[%CustomTracking%]</div>
+  <div id="impression-pixel" class="impression-tracker"><img src="[%ImpressionPixel%]" width="1" height="1" border="0" /></div>
+  <div id="impression-pixel-2" class="impression-tracker"><img src="[%ImpressionPixel2%]" width="1" height="1" border="0" />
+  </div>
+  
+  
+  <script type="text/javascript">
+  
+  // Native Tracking Code ---------------------------------------------
+  
+     var eventTracker = function () {
+    var ETLink = "https://et.nytimes.com/?subject=dfp-ad-events&dfp_creativeid=%ecid!&dfp_lineitemid=%eaid!&dfp_orderid=%ebuy!&dfp_viewport=%%PATTERN:vp%%&pageviewid=%%PATTERN:page_view_id%%&dfp_pos=%%PATTERN:pos%%&dfp_prop=%%PATTERN:prop%%";
+  
+    return {
+      generalEventTrack: function generalEventTrack(type, curr) {
+        var redirectLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
+        event.preventDefault();
+        var trackingLink = ETLink + "&dfp_event_type=" + type + "&dfp_event_location=" + curr;
+        document.createElement('img').src = trackingLink;
+        if (redirectLink != "") { window.open(redirectLink, '_blank'); }
+  
+          parent.postMessage({
+            event: 'send-direct',
+            payload: {
+              dfp_creativeid: '%ecid!',
+              dfp_orderid: '%ebuy!',
+              dfp_viewport: '%%PATTERN:vp%%',
+              dfp_pos: '%%PATTERN:pos%%',
+              dfp_prop: '%%PATTERN:prop%%',
+              dfp_event_type: type,
+              dfp_event_location: curr,
+              subject: 'dfp-ad-events'
+            }
+          },    
+          'https://www.nytimes.com/'
+          );
+        }
+    };
+    }();
+  
+  // End of Native Tracking Code // 
+  // Hide gradient if necessary
+  
+  (function() {
+    var toggleGradient = [%ToggleGradient%];
+    var gradients = [].slice.call(document.getElementsByClassName('gradient'));
+    if (toggleGradient > 0) {gradients.forEach(function(el) { el.style.display = 'none';});}
+  })();
+  
+  parent.postMessage({exclusive: [%Exclusivity%], type: '[%ExclusivityType%]', div:'%%PATTERN:div%%'},'*');
+  
+  </script>
+  
+  
+  
+  
+  
+  
